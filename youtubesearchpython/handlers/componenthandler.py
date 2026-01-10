@@ -28,8 +28,8 @@ class ComponentHandler:
                 'duration':                    self._getValue(video, ['lengthText', 'accessibility', 'accessibilityData', 'label']),
             },
         }
-        component['link'] = 'https://www.youtube.com/watch?v=' + component['id']
-        component['channel']['link'] = 'https://www.youtube.com/channel/' + component['channel']['id']
+        component['link'] = 'https://www.youtube.com/watch?v=' + component['id'] if component['id'] else None
+        component['channel']['link'] = 'https://www.youtube.com/channel/' + component['channel']['id'] if component['channel']['id'] else None
         component['shelfTitle'] = shelfTitle
         return component
 
@@ -44,7 +44,7 @@ class ComponentHandler:
             'descriptionSnippet':              self._getValue(channel, ['descriptionSnippet', 'runs']),
             'subscribers':                     self._getValue(channel, ['subscriberCountText', 'simpleText']),
         }
-        component['link'] = 'https://www.youtube.com/channel/' + component['id']
+        component['link'] = 'https://www.youtube.com/channel/' + component['id'] if component['id'] else None
         return component
 
     def _getPlaylistComponent(self, element: dict) -> dict:
@@ -60,8 +60,8 @@ class ComponentHandler:
             },
             'thumbnails':                     self._getValue(playlist, ['thumbnailRenderer', 'playlistVideoThumbnailRenderer', 'thumbnail', 'thumbnails']),
         }
-        component['link'] = 'https://www.youtube.com/playlist?list=' + component['id']
-        component['channel']['link'] = 'https://www.youtube.com/channel/' + component['channel']['id']
+        component['link'] = 'https://www.youtube.com/playlist?list=' + component['id'] if component['id'] else None
+        component['channel']['link'] = 'https://www.youtube.com/channel/' + component['channel']['id'] if component['channel']['id'] else None
         return component
     
     def _getVideoFromChannelSearch(self, elements: list) -> list:
